@@ -1,0 +1,71 @@
+==========================================================
+MERN-SOCIAL: FULL PRODUCT DEPLOYMENT DOCUMENTATION
+==========================================================
+
+PHASE 1: AWS INFRASTRUCTURE SETUP
+----------------------------------------------------------
+1. PROVISION EC2 INSTANCE:
+   - AMI: Amazon Linux 2023.
+   - Type: t2.micro or t3.micro (Free Tier).
+   - EXPLANATION: Provides the virtualized Linux environment to host 
+     the containerized microservices.
+
+2. NETWORKING & SECURITY:
+   - Inbound Rules:
+     * Port 80 (HTTP): Open to 0.0.0.0/0 (Public traffic).
+     * Port 22 (SSH): Open to Your IP (Management).
+   - EXPLANATION: Security Groups act as a virtual firewall, allowing 
+     users to access the web port while keeping management ports private.
+
+3. ELASTIC IP ASSOCIATION:
+   - Step: Allocate an Elastic IP and associate it with the instance.
+   - EXPLANATION: Standard Public IPs change on reboot. Elastic IP provides 
+     a static address, ensuring your frontend and Socket.io links never break.
+
+
+PHASE 2: SERVER ENVIRONMENT PREPARATION
+----------------------------------------------------------
+4. INSTALL DOCKER ENGINE:
+   $ sudo dnf update -y
+   $ sudo dnf install -y docker
+   $ sudo systemctl start docker
+   $ sudo systemctl enable docker
+   $ sudo usermod -a -G docker ec2-user
+   - EXPLANATION: Docker allows the application to run in isolated 
+     containers, ensuring the "Polyglot" stack (Node.js & .NET) works 
+     perfectly without version conflicts.
+
+
+PHASE 4: APPLICATION DEPLOYMENT
+----------------------------------------------------------
+5. CLONE AND CONFIGURE:
+   $ git clone <your-repo-link>
+   $ cd Mern-Social
+   $ nano .env
+   - EXPLANATION: Environment variables (MONGO_URI, JWT_SECRET) are kept 
+     out of GitHub for security and configured directly on the production server.
+
+6. NGINX REVERSE PROXY:
+   - The nginx.conf maps traffic:
+     * "/" -> React Frontend
+     * "/api" -> Node.js Backend
+   - EXPLANATION: Nginx acts as a high-performance entry point, handling 
+     large file uploads (10MB) and WebSocket upgrades.
+
+7. EXECUTE DOCKER COMPOSE:
+   $ docker compose up -d --build
+   - EXPLANATION: This command builds images for all services (Frontend, 
+     Backend, AI) and starts them in "Detached" mode (background).
+
+
+PHASE 5: DATABASE & FINAL VERIFICATION
+----------------------------------------------------------
+8. MONGODB ATLAS WHITELISTING:
+   - Step: Add the AWS Elastic IP to the Atlas "Network Access" tab.
+   - EXPLANATION: MongoDB Atlas blocks all external traffic by default. 
+     Whitelisting the server IP allows the Node.js backend to persist data.
+
+9. VERIFY STATUS:
+   $ docker ps (Check if all services are 'Up')
+   $ docker compose logs -f (Monitor real-time logs for errors)
+==========================================================
