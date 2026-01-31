@@ -1,0 +1,13 @@
+git clone https://github.com/suhanikasliwal/SocialMediaMiniWeb.git
+
+git pull origin main
+
+git status(red file)
+
+git add .
+
+git status(all green files)
+
+git commit -m "nameofthefile"
+
+git push origin main
