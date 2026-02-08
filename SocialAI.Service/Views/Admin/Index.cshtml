@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Admin Control Panel</title>
+
+    <link rel="stylesheet" href="/css/admin.css" />
+</head>
+<body>
+
+<div class="container">
+    <h1>Admin Control Panel</h1>
+
+    <div class="controls">
+        <input id="searchInput" placeholder="Search by name or email" />
+        <button onclick="searchUsers()">Search</button>
+        <button onclick="resetUsers()">Show All Users</button>
+    </div>
+
+    <table id="usersTable">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <div class="pagination">
+        <button onclick="prevPage()">Previous</button>
+        <span id="pageInfo"></span>
+        <button onclick="nextPage()">Next</button>
+    </div>
+</div>
+
+<script src="/js/admin.js"></script>
+</body>
+</html>

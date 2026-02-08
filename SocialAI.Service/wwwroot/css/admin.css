@@ -1,0 +1,90 @@
+body {
+    font-family: Inter, system-ui, sans-serif;
+    background: #0f172a;
+    color: #e5e7eb;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.banner {
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.banner.demo {
+    background: #0a5e46;
+}
+
+.banner.prod {
+    background: #7c2d12;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #334155;
+}
+
+select, button {
+    background: #020617;
+    color: #e5e7eb;
+    border: 1px solid #334155;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button {
+    margin-right: 6px;
+}
+body {
+    background: #0f172a;
+    color: white;
+    font-family: system-ui;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 30px;
+}
+
+.controls {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+input, button, select {
+    padding: 6px 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #334155;
+}
+
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
